@@ -16,8 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center_horizontal">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/info"
@@ -32,14 +31,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/account_circle"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="140dp"
         />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/header"
@@ -58,6 +57,35 @@
             android:layout_marginLeft="5dp"
             android:text="Sample Text"
 
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/image"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hapticFeedbackEnabled="true"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            android:text="Upload Image"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:clickable="true"
+            android:background="@drawable/btn_click"
+            android:gravity="center"
+            android:id="@+id/upload_image"
+            android:focusable="true"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
