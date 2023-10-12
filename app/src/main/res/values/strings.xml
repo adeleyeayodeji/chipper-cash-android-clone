@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OpayKotlin</string>
+    <string name="info_icon">Info Icon</string>
+    <string name="user_icon">User Icon</string>
 </resources>

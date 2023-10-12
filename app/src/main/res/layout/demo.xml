@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/cost_of_service"-->
+    <!--            android:layout_width="160dp"-->
+    <!--            android:layout_height="48dp"-->
+    <!--            android:hint="Cost of Service"-->
+    <!--            android:inputType="numberDecimal" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="5dp"-->
+    <!--            android:text="Sample Text"-->
+
+    <!--            />-->
+
+    <!--        <ImageView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:src="@drawable/ic_launcher_background"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:layout_marginLeft="5dp"-->
+    <!--            android:layout_marginRight="5dp"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:id="@+id/image"-->
+    <!--            />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="5dp"-->
+    <!--            android:hapticFeedbackEnabled="true"-->
+    <!--            android:layout_marginTop="60dp"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:text="Upload Image"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:clickable="true"-->
+    <!--            android:background="@drawable/btn_click"-->
+    <!--            android:gravity="center"-->
+    <!--            android:id="@+id/upload_image"-->
+    <!--            android:focusable="true"-->
+    <!--            />-->
+</androidx.constraintlayout.widget.ConstraintLayout>
