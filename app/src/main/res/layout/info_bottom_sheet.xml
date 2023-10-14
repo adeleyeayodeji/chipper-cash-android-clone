@@ -14,17 +14,16 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/bottom_sheet_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="How can we help you?"
-            android:textSize="19sp"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:text="How can we help you?"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:id="@+id/bottom_sheet_title"
-            />
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -53,28 +52,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Help Center"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Resolve issue quicker. Help yourself with our support articles"
-                    android:textSize="15sp"
                     android:textColor="#535050"
-                    />
+                    android:textSize="14sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/arrow_forward_ios"
-                />
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/arrow_forward_ios" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -106,26 +103,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chat with us"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chat with someone. We'll respond as soon as we can"
-                    android:textSize="15sp"
                     android:textColor="#535050"
-                    />
+                    android:textSize="14sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="15dp"
                 android:src="@drawable/arrow_forward_ios"
                 />
 

@@ -5,142 +5,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    android:layout_marginTop="@dimen/_20dp"
+    android:background="#F3EFEF"
+    android:paddingTop="@dimen/_20dp"
+    android:forceDarkAllowed="false"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/body_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+    >
 
-        <ImageView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@string/info_icon"
-            android:src="@drawable/help_icon" />
+    <!--    Header Layout-->
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/user_icon"
-            android:src="@drawable/account_circle" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <include
+        android:id="@+id/header_layout"
+        layout="@layout/home_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    Balance Layout-->
+
+    <include
+        android:id="@+id/balance_layout"
+        layout="@layout/balance_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20dp"
-        app:layout_constraintTop_toBottomOf="@id/header">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_layout" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <!--    Balance Button Layout-->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-            app:contentPadding="10dp"
-                app:contentPaddingLeft="15dp"
-                app:contentPaddingTop="13dp"
-                app:contentPaddingBottom="13dp"
-            app:cardCornerRadius="15dp"
-                app:cardPreventCornerOverlap="false">
+    <include
+        android:id="@+id/balance_button_layout"
+        layout="@layout/balance_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/balance_layout" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="3dp">
+<!--    Airtime Data Pay bill-->
 
-                        <ImageView
-                            android:id="@+id/flag_icon"
-                            android:layout_width="30dp"
-                            android:layout_height="20dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/nigeria" />
-                    </androidx.cardview.widget.CardView>
+<include
+    android:id="@+id/airtime_data_paybills_layout"
+    layout="@layout/airtime_data_paybills_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_20dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/body_main_layout" />
 
-                    <ImageView
-                        android:id="@+id/unfold_more_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="18dp"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginTop="0dp"
-                        android:src="@drawable/unfold_more" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="#878585"
-                    android:layout_marginBottom="5dp"
-                    android:text="Your Balance" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="#000000"
-                        android:text="NGN" />
-                    <TextView
-                        android:id="@+id/balance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="#000000"
-                        android:text="488.14" />
-
-                    <ImageView
-                        android:id="@+id/visibility_on_icon"
-                        android:clickable="true"
-                        android:hapticFeedbackEnabled="true"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="3dp"
-                        android:src="@drawable/visibility_on" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
