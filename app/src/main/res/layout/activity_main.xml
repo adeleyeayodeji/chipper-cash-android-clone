@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:forceDarkAllowed="false"
     tools:context=".MainActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <androidx.appcompat.widget.LinearLayoutCompat
     android:id="@+id/body_main_layout"
@@ -66,93 +69,36 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/body_main_layout" />
 
+<!--    Payment Slider-->
+
+<include
+    android:id="@+id/payment_slider_layout"
+    layout="@layout/payment_slider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_20dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/airtime_data_paybills_layout" />
+
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20dp"
-        android:orientation="vertical"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/airtime_data_paybills_layout">
+        app:layout_constraintTop_toBottomOf="@id/payment_slider_layout"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_20dp"
         >
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="350dp"
-            android:layout_height="160dp"
-            app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="#0C2456"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
-            app:contentPaddingBottom="10dp"
-            app:contentPaddingLeft="20dp"
-            app:contentPaddingRight="20dp"
-            app:contentPaddingTop="20dp"
-            >
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:layout_width="79dp"
-                        android:layout_height="79dp"
-                        android:src="@drawable/padlock" />
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/padlock_withey" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Protect Your Account!"
-                                android:textColor="#FFFFFF"
-                                android:textSize="17sp"
-                                android:textStyle="bold"
-                                android:layout_marginStart="2dp"
-                                />
-
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Never share your PIN, password, or OTP with anyone. Do not click on suspicious links!"
-                            android:textColor="#FFFFFF"
-                            android:textSize="13sp"
-                            android:layout_marginTop="5dp"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="LEARN MORE>"
-                            android:textColor="#44F4AE"
-                            android:textSize="11sp"
-                            android:layout_marginTop="30dp"
-                            android:gravity="start"
-                            />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/payment_slider_body_main_layout_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
