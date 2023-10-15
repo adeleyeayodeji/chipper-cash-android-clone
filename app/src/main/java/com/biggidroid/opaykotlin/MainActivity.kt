@@ -33,21 +33,17 @@ class MainActivity : AppCompatActivity() {
         //set on click listener
         setOnClickListener()
 
-        recyclerView = findViewById(R.id.payment_slider_body_main_layout_test)
+        recyclerView = findViewById(R.id.payment_slider_cardview)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
         // Initialize your paymentDataList with sample data
         paymentDataList = ArrayList()
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Adeleye Ayodeji", R.drawable.map))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("PayPal", R.drawable.lab_profile))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Bitcoin", R.drawable.wifi_tethering))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Bitcoin", R.drawable.wifi_tethering))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Bitcoin", R.drawable.wifi_tethering))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Bitcoin", R.drawable.wifi_tethering))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Bitcoin", R.drawable.wifi_tethering))
+        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Protect Your Account!", R.drawable.nigeria, R.drawable.map))
+        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe))
+        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Invest in global stocks for as low as $1", R.drawable.icons8_globe, R.drawable.wifi_tethering))
 
 
-        adapter = PaymentSliderAdapter(paymentDataList)
+        adapter = PaymentSliderAdapter(paymentDataList as ArrayList<PaymentData>)
         recyclerView.setAdapter(adapter)
     }
 
@@ -99,6 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         // Handle back navigation within your app
         finish()
     }
