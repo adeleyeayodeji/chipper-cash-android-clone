@@ -56,25 +56,13 @@ class MainActivity : AppCompatActivity() {
         //set on click listener on visibility_on_icon
         visibility_on_icon.setOnClickListener {
             Log.d("TAG_DATA", "setOnClickListener: ")
+            hideOrShowBalance()
+        }
 
-            // Get a reference to the Vibrator service
-            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-            // Vibrate for 50 milliseconds (adjust duration as needed)
-            vibrator.vibrate(50)
-
-            //onclick check if balance is text is ***** or not
-            if (balance.text == "* * * * *") {
-                //if balance is ***** then set balance text to 0.00
-                balance.text = "488.14"
-                //set visibility icon to visibility_off_icon
-                visibility_on_icon.setImageResource(R.drawable.visibility_on)
-            } else {
-                //if balance is not ***** then set balance text to *****
-                balance.text = "* * * * *"
-                //set visibility icon to visibility_on_icon
-                visibility_on_icon.setImageResource(R.drawable.visibility_off)
-            }
+        //balance
+        balance.setOnClickListener {
+            Log.d("TAG_DATA", "setOnClickListener: ")
+            hideOrShowBalance()
         }
 
         //set on click listener on info
@@ -88,6 +76,28 @@ class MainActivity : AppCompatActivity() {
 
             val bottomSheetFragment = InfoBottomSheet()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
+    }
+
+    //hide or show balance
+    private fun hideOrShowBalance() {
+        // Get a reference to the Vibrator service
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        // Vibrate for 50 milliseconds (adjust duration as needed)
+        vibrator.vibrate(50)
+
+        //onclick check if balance is text is ***** or not
+        if (balance.text == "* * * * *") {
+            //if balance is ***** then set balance text to 0.00
+            balance.text = "488.14"
+            //set visibility icon to visibility_off_icon
+            visibility_on_icon.setImageResource(R.drawable.visibility_on)
+        } else {
+            //if balance is not ***** then set balance text to *****
+            balance.text = "* * * * *"
+            //set visibility icon to visibility_on_icon
+            visibility_on_icon.setImageResource(R.drawable.visibility_off)
         }
     }
 
