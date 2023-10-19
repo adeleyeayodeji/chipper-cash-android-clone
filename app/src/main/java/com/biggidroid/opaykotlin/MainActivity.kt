@@ -7,11 +7,11 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.biggidroid.opaykotlin.adapter.PaymentSliderAdapter
+import androidx.viewpager.widget.ViewPager
+import com.biggidroid.opaykotlin.adapter.SliderAdapter
 import com.biggidroid.opaykotlin.bottomsheet.InfoBottomSheet
-import com.biggidroid.opaykotlin.model.PaymentData
+import com.biggidroid.opaykotlin.model.SlideItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var info: ImageView
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: PaymentSliderAdapter
-    private lateinit var paymentDataList: List<PaymentData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +31,17 @@ class MainActivity : AppCompatActivity() {
         //set on click listener
         setOnClickListener()
 
-        recyclerView = findViewById(R.id.payment_slider_cardview)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-        // Initialize your paymentDataList with sample data
-        paymentDataList = ArrayList()
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Protect Your Account!", R.drawable.nigeria, R.drawable.map))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe))
-        (paymentDataList as ArrayList<PaymentData>).add(PaymentData("Invest in global stocks for as low as $1", R.drawable.icons8_globe, R.drawable.wifi_tethering))
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
 
+        val slideItems = listOf(
+            SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
+            SlideItem("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe),
+            SlideItem("Invest in global stocks for as low as $1", R.drawable.icons8_globe, R.drawable.wifi_tethering)
+        )
 
-        adapter = PaymentSliderAdapter(paymentDataList as ArrayList<PaymentData>)
-        recyclerView.setAdapter(adapter)
+        val adapter2 = SliderAdapter(this, slideItems)
+        viewPager.adapter = adapter2
     }
 
     //find view
