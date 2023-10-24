@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="350dp"
-    android:layout_height="160dp"
+    android:layout_height="170dp"
     app:cardCornerRadius="12dp"
     app:cardBackgroundColor="#0C2456"
     app:cardPreventCornerOverlap="false"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="Protect Your Account!"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginStart="2dp"
                     />
@@ -63,17 +63,17 @@
                 android:layout_height="wrap_content"
                 android:text="Never share your PIN, password, or OTP with anyone. Do not click on suspicious links!"
                 android:textColor="#FFFFFF"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:layout_marginTop="5dp"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LEARN MORE>"
+                android:text="LEARN MORE >"
                 android:textColor="#44F4AE"
                 android:textSize="11sp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:gravity="start"
                 />
 

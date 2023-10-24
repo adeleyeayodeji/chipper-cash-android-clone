@@ -1,5 +1,13 @@
 package com.biggidroid.opaykotlin
 
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.Manifest.permission.READ_MEDIA_VIDEO
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class Demo : AppCompatActivity() {
@@ -8,22 +16,22 @@ class Demo : AppCompatActivity() {
 //    private lateinit var button: TextView
 //    private lateinit var imageView: ImageView
 //    private var isGalleryOpened: Boolean = false
-    fun init(){
+//    fun init(){
         //find the view
 //        findViews()
         //set the click listener
 //        setClickListener()
 
 //        createNotificationChannel()
-    }
+//    }
 
     //    //find the view
 //    private fun findViews() {
 //        button = findViewById(R.id.upload_image)
 //        imageView = findViewById(R.id.image)
 //    }
-//
-//    //set the click listener
+
+    //set the click listener
 //    private fun setClickListener() {
 //        //set the click listener
 //        button.setOnClickListener {
@@ -54,8 +62,8 @@ class Demo : AppCompatActivity() {
 //            }
 //        }
 //    }
-//
-//    //openGallery
+
+    //openGallery
 //    private fun openGallery() {
 //        Log.d("TAG_DATA", "Gallery opened")
 //        //check if gallery already opened
@@ -74,8 +82,8 @@ class Demo : AppCompatActivity() {
 //        // Launching the Intent
 //        resultLauncher.launch(intent)
 //    }
-//
-//    //requestPermission
+
+    //requestPermission
 //    private fun requestPermission() {
 //        // Request the permission
 //        requestPermissionLauncher.launch(
@@ -87,7 +95,7 @@ class Demo : AppCompatActivity() {
 //            )
 //        )
 //    }
-//
+
 //    private fun uriToFile(uri: Uri): File {
 //        val context = applicationContext
 //        val inputStream = context.contentResolver.openInputStream(uri)
@@ -101,8 +109,8 @@ class Demo : AppCompatActivity() {
 //
 //        return file
 //    }
-//
-//    //resultLauncher
+
+    //resultLauncher
 //    private val resultLauncher =
 //        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //            //Gallery is closed
@@ -134,8 +142,8 @@ class Demo : AppCompatActivity() {
 //                // Handle the case where data is null.
 //            }
 //        }
-//
-//    //requestPermissionLauncher
+
+    //requestPermissionLauncher
 //    private val requestPermissionLauncher =
 //        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
 //            // Check if the permission is granted or not
@@ -146,15 +154,15 @@ class Demo : AppCompatActivity() {
 //            ) {
 //                // Permission is granted
 //                // Open the gallery and select the image
-//                openGallery()
+////                openGallery()
 //            } else {
 //                // Permission is not granted
 //                Log.d("TAG_DATA", "Permission not granted")
 //
 //            }
 //        }
-//
-//    //Register Notification Channel
+
+    //Register Notification Channel
 //    fun createNotificationChannel(){
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            val channelId = "my_channel_id"
@@ -167,7 +175,7 @@ class Demo : AppCompatActivity() {
 //            notificationManager.createNotificationChannel(channel)
 //        }
 //    }
-//
+
 //    private fun sendNotification() {
 //        Log.d("TAG_DATA", "sendNotification")
 //        val channelId = "my_channel_id"

@@ -7,11 +7,14 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.biggidroid.opaykotlin.adapter.SliderAdapter
+import com.biggidroid.opaykotlin.adapter.TransactionItemAdapter
 import com.biggidroid.opaykotlin.bottomsheet.InfoBottomSheet
 import com.biggidroid.opaykotlin.model.SlideItem
+import com.biggidroid.opaykotlin.model.TransactionItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +45,30 @@ class MainActivity : AppCompatActivity() {
 
         val adapter2 = SliderAdapter(this, slideItems)
         viewPager.adapter = adapter2
+
+        val transactionRecyclerView: RecyclerView = findViewById(R.id.transactionRecyclerView)
+
+        // Sample list of TransactionItem objects (replace with your data)
+        val transactionItems = listOf(
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+            TransactionItem(R.drawable.account_circle, "You paid IKEJA Prepaid Electricity", "₦5,000.00", "Thursday, 12th March 2020", "debit", "For IKEJA Prepaid Electricity"),
+        )
+
+        val transactionAdapter = TransactionItemAdapter(this, transactionItems)
+        transactionRecyclerView.adapter = transactionAdapter
+        transactionRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     //find view

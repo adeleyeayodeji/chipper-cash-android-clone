@@ -55,7 +55,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/wifi_tethering"
+                android:src="@drawable/wifi_tethering_black"
                 android:layout_marginBottom="5dp"
                 />
 
@@ -82,7 +82,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/lab_profile"
+                android:src="@drawable/lab_profile_black"
                 android:layout_marginBottom="5dp"
                 />
 
