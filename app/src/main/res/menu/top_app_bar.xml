@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/account_icon"
+        android:icon="@drawable/account_circle"
+        android:title="Account"
+        android:contentDescription="Some description"
+        app:showAsAction="ifRoom" />
+
+</menu>

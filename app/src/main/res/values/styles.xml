@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="BottomSheetDialogCustom" parent="Theme.Design.BottomSheetDialog">
         <item name="android:topLeftRadius">0dp</item>
         <item name="android:topRightRadius">0dp</item>
@@ -16,5 +17,11 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="contentPadding">0dp</item>
+    </style>
+
+    <!--    AppTheme.AppBarOverlay-->
+    <!-- Define the AppBarOverlay style -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Customize the appearance of the app bar overlay here -->
     </style>
 </resources>

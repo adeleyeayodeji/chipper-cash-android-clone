@@ -1,97 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:id="@+id/body_main_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/_20dp"
-    android:background="#F3EFEF"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="20dp"
-    android:orientation="vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
-    <!--    Header Layout-->
-
-    <include
-        android:id="@+id/header_layout"
-        layout="@layout/home_header"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:elevation="0dp"
+        >
 
-    <!--    Balance Layout-->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F3EFEF"
+            android:minHeight="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/help_icon"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:titleCentered="true"
+            app:titleTextColor="@color/black"
+            app:titleTextStyle="@style/TextAppearance.Material3.ActionBar.Title"
+            app:logoAdjustViewBounds="true"
+            app:tabIndicatorHeight="@null"
+            android:textStyle="bold"
+            />
 
-    <include
-        android:id="@+id/balance_layout"
-        layout="@layout/balance_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_layout" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <!--    Balance Button Layout-->
-
-    <include
-        android:id="@+id/balance_button_layout"
-        layout="@layout/balance_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/balance_layout" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--    Airtime Data Pay bill-->
-
-<include
-    android:id="@+id/airtime_data_paybills_layout"
-    layout="@layout/airtime_data_paybills_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_10dp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/body_main_layout" />
-
-<!--    Payment Slider-->
-    <include
-        android:id="@+id/banner_slider_layout"
-        layout="@layout/banner_slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/airtime_data_paybills_layout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/transactionRecyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp"
-        android:nestedScrollingEnabled="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/banner_slider_layout"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include layout="@layout/content_main" />
 
-</androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
