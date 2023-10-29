@@ -21,6 +21,7 @@ import com.google.android.material.appbar.MaterialToolbar
 class MainActivity : AppCompatActivity() {
     private lateinit var visibility_on_icon: ImageView
     private lateinit var balance: TextView
+    private lateinit var info: ImageView
 
     private lateinit var recyclerView: RecyclerView
 
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
     private fun findView() {
         visibility_on_icon = findViewById(R.id.visibility_on_icon)
         balance = findViewById(R.id.balance)
+        info = findViewById(R.id.info)
     }
 
     //set on click listener
@@ -92,17 +94,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         //set on click listener on info
-//        info.setOnClickListener {
-//            Log.d("TAG_DATA", "setOnClickListener: ")
-//            // Get a reference to the Vibrator service
-//            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-//
-//            // Vibrate for 50 milliseconds (adjust duration as needed)
-//            vibrator.vibrate(50)
-//
-//            val bottomSheetFragment = InfoBottomSheet()
-//            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-//        }
+        info.setOnClickListener {
+            Log.d("TAG_DATA", "setOnClickListener: ")
+            // Get a reference to the Vibrator service
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+            // Vibrate for 50 milliseconds (adjust duration as needed)
+            vibrator.vibrate(50)
+
+            val bottomSheetFragment = InfoBottomSheet()
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
     }
 
     //hide or show balance
