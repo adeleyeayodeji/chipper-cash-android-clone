@@ -21,7 +21,6 @@ import com.google.android.material.appbar.MaterialToolbar
 class MainActivity : AppCompatActivity() {
     private lateinit var visibility_on_icon: ImageView
     private lateinit var balance: TextView
-    private lateinit var topAppBar: MaterialToolbar
 
     private lateinit var recyclerView: RecyclerView
 
@@ -76,10 +75,6 @@ class MainActivity : AppCompatActivity() {
     private fun findView() {
         visibility_on_icon = findViewById(R.id.visibility_on_icon)
         balance = findViewById(R.id.balance)
-        topAppBar = findViewById(R.id.topAppBar)
-
-        //set title NGN 488.14
-        topAppBar.title = "NGN 488.14"
     }
 
     //set on click listener

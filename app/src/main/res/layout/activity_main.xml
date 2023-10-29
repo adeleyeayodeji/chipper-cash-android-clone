@@ -12,23 +12,7 @@
         android:layout_height="wrap_content"
         app:elevation="0dp"
         >
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F3EFEF"
-            android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"
-            app:navigationIcon="@drawable/help_icon"
-            app:tabIndicatorColor="@android:color/transparent"
-            app:titleCentered="true"
-            app:titleTextColor="@color/black"
-            app:titleTextStyle="@style/TextAppearance.Material3.ActionBar.Title"
-            app:logoAdjustViewBounds="true"
-            app:tabIndicatorHeight="@null"
-            android:textStyle="bold"
-            />
+        <include layout="@layout/home_header" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
