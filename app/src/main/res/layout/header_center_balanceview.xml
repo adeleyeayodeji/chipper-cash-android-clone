@@ -22,12 +22,12 @@
         android:text="488.14" />
 
     <ImageView
-        android:id="@+id/visibility_on_iconHeaderTop"
+        android:id="@+id/currency_selector_header_top"
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/visibility_on" />
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/keyboard_arrow_down" />
 </androidx.appcompat.widget.LinearLayoutCompat>

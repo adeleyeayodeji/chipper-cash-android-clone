@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
     private lateinit var transactionRecyclerView: RecyclerView
     private lateinit var home_nested_scroll_view: NestedScrollView
     private lateinit var balance_view_header_logic: RelativeLayout
+    private lateinit var currency_selector_header_top: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -195,6 +196,25 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         transactionRecyclerView = findViewById(R.id.transactionRecyclerView)
         home_nested_scroll_view = findViewById(R.id.home_nested_scroll_view)
         balance_view_header_logic = findViewById(R.id.balance_view_header_logic)
+        currency_selector_header_top = findViewById(R.id.currency_selector_header_top)
+
+        //move balance_view_header_logic to top
+        val params = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        //set top
+        params.setMargins(0, 0, 0, 0)
+        //padding
+        balance_view_header_logic.setPadding(0, 130, 0, 0)
+        balance_view_header_logic.layoutParams = params
+
+        //set image height and width currency_selector_header_top
+        val layoutParams = currency_selector_header_top.layoutParams
+        layoutParams.width = 0
+        layoutParams.height = 0
+        currency_selector_header_top.layoutParams = layoutParams
     }
 
     //set on click listener
@@ -266,34 +286,51 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         oldScrollX: Int,
         oldScrollY: Int
     ) {
-        if(scrollY > 105){
-            //visibility visible
-            balance_view_header_logic.visibility = RelativeLayout.VISIBLE
-    //set opacity from 0.0f to 0.1f till 1.0f
-            val opacity = scrollY.toFloat() / 500 // 0.0f to 1.0f
-            Log.d("TAG_DATA", "onScrollopacity: $opacity")
-            balance_view_header_logic.alpha = opacity
-            //move balance_view_header_logic to top
-            val params = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            )
+        //visibility visible
+        //set opacity from 0.0f to 0.1f till 1.0f
+        val opacity = scrollY.toFloat() / 300 // 0.0f to 1.0f
+//            Log.d("TAG_DATA", "onScrollopacity: $opacity")
+        balance_view_header_logic.alpha = opacity
+        //move balance_view_header_logic to top
+        val params = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        //set padding max 50 from 130
+        var paddingDynamic = 130 - scrollY / 2
 
-            //set top
-            params.setMargins(0, 0, 0, 0)
-            //padding
-            balance_view_header_logic.setPadding(0, 40, 0, 0)
-            balance_view_header_logic.layoutParams = params
-
-        }else{
-            //set opacity from 1.0 to 0.0f
-            balance_view_header_logic.alpha =  1.0f - scrollY.toFloat() / 500
-            //visibility gone
-            balance_view_header_logic.visibility = RelativeLayout.GONE
-
-
+        if (scrollY >= 176) {
+            paddingDynamic = 40
         }
-        //set margin top for balance_view_header_logic
-        Log.d("TAG_DATA", "onScrollChange: $scrollY")
+
+//        Log.d("TAG_DATA", "onScrollpaddingDynamic: $paddingDynamic")
+
+        //set top
+        params.setMargins(0, 0, 0, 0)
+        //padding
+        balance_view_header_logic.setPadding(0, paddingDynamic, 0, 0)
+        balance_view_header_logic.layoutParams = params
+
+        //currency_selector_header_top
+        val params2 = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        //width and height for currency_selector_header_top
+        var width = scrollY / 2
+
+        //check if width is greater than 24
+        if (width >= 60) {
+            width = 60
+        }
+
+        //set image height and width currency_selector_header_top
+        val layoutParams = currency_selector_header_top.layoutParams
+        layoutParams.width = width
+        layoutParams.height = width
+        currency_selector_header_top.layoutParams = layoutParams
+
+//        Log.d("TAG_DATA", "onScrollChange: $scrollY")
     }
 }
