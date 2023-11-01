@@ -25,6 +25,8 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="3dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
         >
         <ImageView
             android:id="@+id/currency_selector_header_top"
