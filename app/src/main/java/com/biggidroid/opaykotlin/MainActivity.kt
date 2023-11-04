@@ -296,11 +296,11 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
-        //set padding max 50 from 130
+        //set padding max 45 from 130
         var paddingDynamic = 130 - scrollY / 2
 
         if (scrollY >= 176) {
-            paddingDynamic = 40
+            paddingDynamic = 45
         }
 
 //        Log.d("TAG_DATA", "onScrollpaddingDynamic: $paddingDynamic")
