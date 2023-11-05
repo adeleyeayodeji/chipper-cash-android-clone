@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -22,6 +23,7 @@ import com.biggidroid.opaykotlin.adapter.TransactionItemAdapter
 import com.biggidroid.opaykotlin.bottomsheet.InfoBottomSheet
 import com.biggidroid.opaykotlin.model.SlideItem
 import com.biggidroid.opaykotlin.model.TransactionItem
+import com.biggidroid.opaykotlin.viewmodel.AppViewModel
 import com.google.android.material.appbar.AppBarLayout
 
 
@@ -35,10 +37,18 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
     private lateinit var home_nested_scroll_view: NestedScrollView
     private lateinit var balance_view_header_logic: RelativeLayout
     private lateinit var currency_selector_header_top: ImageView
+    public lateinit var appViewModel: AppViewModel
+    private lateinit var balanceHeaderTop: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //init view model
+        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+
+        //init default currency visibility
+        appViewModel.initDefaultCurrencyVisibility(this)
 
         //find view
         findView()
@@ -48,6 +58,9 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
 
         //on scroll listener
         onScrollListener()
+
+        //init observer
+        initObserver()
 
 
         val viewPager = findViewById<ViewPager>(R.id.viewPager)
@@ -197,6 +210,7 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         home_nested_scroll_view = findViewById(R.id.home_nested_scroll_view)
         balance_view_header_logic = findViewById(R.id.balance_view_header_logic)
         currency_selector_header_top = findViewById(R.id.currency_selector_header_top)
+        balanceHeaderTop = findViewById(R.id.balanceHeaderTop)
 
         //move balance_view_header_logic to top
         val params = RelativeLayout.LayoutParams(
@@ -253,24 +267,17 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
 
     //hide or show balance
     private fun hideOrShowBalance() {
-        // Get a reference to the Vibrator service
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        //get currencyVisibility
+        val currencyVisibility = appViewModel.currencyVisibility.value
 
-        // Vibrate for 50 milliseconds (adjust duration as needed)
-        vibrator.vibrate(50)
+        //check if currencyVisibility is true
+        appViewModel._currencyVisibility.value = currencyVisibility != true
 
-        //onclick check if balance is text is ***** or not
-        if (balance.text == "* * * * *") {
-            //if balance is ***** then set balance text to 0.00
-            balance.text = "488.14"
-            //set visibility icon to visibility_off_icon
-            visibility_on_icon.setImageResource(R.drawable.visibility_on)
-        } else {
-            //if balance is not ***** then set balance text to *****
-            balance.text = "* * * * *"
-            //set visibility icon to visibility_on_icon
-            visibility_on_icon.setImageResource(R.drawable.visibility_off)
-        }
+        //save data to shared preference
+        val sharedPref = getSharedPreferences("currencyVisibility", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("currency_visibility_key", currencyVisibility != true)
+        editor.apply()
     }
 
     override fun onBackPressed() {
@@ -332,5 +339,33 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         currency_selector_header_top.layoutParams = layoutParams
 
 //        Log.d("TAG_DATA", "onScrollChange: $scrollY")
+    }
+
+    private fun initObserver() {
+        //observe currencyVisibility
+        appViewModel.currencyVisibility.observe(this) {
+            Log.d("TAG_DATA", "Observer $it")
+            // Get a reference to the Vibrator service
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+            // Vibrate for 50 milliseconds (adjust duration as needed)
+            vibrator.vibrate(50)
+
+            if (it) {
+                //if balance is ***** then set balance text to 0.00
+                balance.text = "488.14"
+                //balanceHeaderTop
+                balanceHeaderTop.text = "488.14"
+                //set visibility icon to visibility_off_icon
+                visibility_on_icon.setImageResource(R.drawable.visibility_on)
+            } else {
+                //if balance is not ***** then set balance text to *****
+                balance.text = "* * * * *"
+                //balanceHeaderTop
+                balanceHeaderTop.text = "* * * * *"
+                //set visibility icon to visibility_on_icon
+                visibility_on_icon.setImageResource(R.drawable.visibility_off)
+            }
+        }
     }
 }

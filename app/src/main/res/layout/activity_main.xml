@@ -34,74 +34,12 @@
 
     </FrameLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:padding="5dp"
-        >
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingStart="@dimen/_20dp"
-            android:paddingEnd="@dimen/_20dp"
-            >
+    <include layout="@layout/bottom_navigation_view" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Request"
-                android:textSize="15sp"
-                android:background="@drawable/custom_border"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:layout_weight="2"
-                android:textAlignment="center"
-                android:layout_marginEnd="5dp"
-                android:radius="17dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:background="@drawable/custom_border_darkpurple"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:layout_marginStart="5dp"
-                android:layout_weight="2"
-                android:radius="17dp" />
-
-        </LinearLayout>
-
-        <!--    Bottom Navigation View-->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            app:elevation="0dp"
-            app:itemBackground="@null"
-            app:itemIconTint="@color/bnv_tab_item_foreground"
-            app:itemRippleColor="@null"
-            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
-            app:itemTextAppearanceInactive="@style/BottomNavigationView"
-            app:itemTextColor="@color/bnv_tab_item_foreground"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation_menu" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
