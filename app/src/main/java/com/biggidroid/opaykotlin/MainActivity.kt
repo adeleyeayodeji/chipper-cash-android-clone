@@ -5,6 +5,8 @@ import android.R.attr.left
 import android.R.attr.right
 import android.R.attr.top
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Vibrator
 import android.util.Log
@@ -12,9 +14,12 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -39,6 +44,9 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
     private lateinit var currency_selector_header_top: ImageView
     public lateinit var appViewModel: AppViewModel
     private lateinit var balanceHeaderTop: TextView
+    private lateinit var home_header_contraint_layout: ConstraintLayout
+    private lateinit var header: LinearLayoutCompat
+    private lateinit var user_home_icon: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -211,6 +219,9 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         balance_view_header_logic = findViewById(R.id.balance_view_header_logic)
         currency_selector_header_top = findViewById(R.id.currency_selector_header_top)
         balanceHeaderTop = findViewById(R.id.balanceHeaderTop)
+        home_header_contraint_layout = findViewById(R.id.home_header_contraint_layout)
+        header = findViewById(R.id.header)
+        user_home_icon = findViewById(R.id.user)
 
         //move balance_view_header_logic to top
         val params = RelativeLayout.LayoutParams(
@@ -256,6 +267,13 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
 
             val bottomSheetFragment = InfoBottomSheet()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
+
+        //set onclick user_home_icon
+        user_home_icon.setOnClickListener {
+            //goto user page
+            val intent = Intent(this, UserPage::class.java)
+            startActivity(intent)
         }
     }
 
@@ -310,6 +328,16 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
             paddingDynamic = 45
         }
 
+        if (scrollY >= 500) {
+            //set home_header_contraint_layout background color to white
+            home_header_contraint_layout.setBackgroundColor(Color.parseColor("#ffffff"));
+            header.setBackgroundColor(Color.parseColor("#ffffff"));
+        }else{
+            //restore color to #F3EFEF
+            home_header_contraint_layout.setBackgroundColor(Color.parseColor("#F3EFEF"));
+            header.setBackgroundColor(Color.parseColor("#F3EFEF"));
+        }
+
 //        Log.d("TAG_DATA", "onScrollpaddingDynamic: $paddingDynamic")
 
         //set top
@@ -344,13 +372,6 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
     private fun initObserver() {
         //observe currencyVisibility
         appViewModel.currencyVisibility.observe(this) {
-            Log.d("TAG_DATA", "Observer $it")
-            // Get a reference to the Vibrator service
-            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-            // Vibrate for 50 milliseconds (adjust duration as needed)
-            vibrator.vibrate(50)
-
             if (it) {
                 //if balance is ***** then set balance text to 0.00
                 balance.text = "488.14"
