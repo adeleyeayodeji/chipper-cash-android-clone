@@ -8,6 +8,13 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here -->
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">#8000FF</item>
+        <item name="colorPrimaryDark">#8000FF</item>
+        <item name="colorAccent">#8000FF</item>
+
+        <!-- Set the status bar color -->
+        <item name="android:statusBarColor">#8000FF</item>
     </style>
 
     <style name="TopCornerCardview" parent="Widget.MaterialComponents.CardView">

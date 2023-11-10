@@ -4,12 +4,21 @@ import android.R.attr.bottom
 import android.R.attr.left
 import android.R.attr.right
 import android.R.attr.top
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
+import android.transition.Fade
+import android.transition.Slide
+import android.transition.TransitionInflater
+import android.transition.TransitionSet
 import android.util.Log
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -273,7 +282,21 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
         user_home_icon.setOnClickListener {
             //goto user page
             val intent = Intent(this, UserPage::class.java)
-            startActivity(intent)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Apply activity transition
+                val transition = TransitionInflater.from(this)
+                    .inflateTransition(R.transition.custom_slide_transition)
+
+                window.reenterTransition = transition
+                window.exitTransition = transition
+
+// Start the new activity
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            } else {
+                // Swap without transition
+                startActivity(intent)
+            }
         }
     }
 
@@ -332,7 +355,7 @@ class MainActivity : AppCompatActivity(), NestedScrollView.OnScrollChangeListene
             //set home_header_contraint_layout background color to white
             home_header_contraint_layout.setBackgroundColor(Color.parseColor("#ffffff"));
             header.setBackgroundColor(Color.parseColor("#ffffff"));
-        }else{
+        } else {
             //restore color to #F3EFEF
             home_header_contraint_layout.setBackgroundColor(Color.parseColor("#F3EFEF"));
             header.setBackgroundColor(Color.parseColor("#F3EFEF"));

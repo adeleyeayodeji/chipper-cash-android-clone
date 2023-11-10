@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Enter transition: Slide up from bottom -->
+    <slide android:slideEdge="left">
+        <targets>
+            <!-- Exclude the toolbar and bottom bar by specifying their resource IDs -->
+            <target
+                android:excludeId="@android:id/statusBarBackground" />
+            <target
+                android:excludeId="@android:id/navigationBarBackground" />
+        </targets>
+    </slide>
+</transitionSet>

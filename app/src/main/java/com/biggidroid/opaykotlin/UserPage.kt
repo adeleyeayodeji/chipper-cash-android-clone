@@ -25,7 +25,7 @@ class UserPage : AppCompatActivity() {
     //set on click listener
     private fun setOnClickListener() {
         close_icon_user_page.setOnClickListener {
-            finish()
+            finishAfterTransition()
         }
     }
 }

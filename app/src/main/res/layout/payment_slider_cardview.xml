@@ -6,7 +6,7 @@
     android:layout_width="350dp"
     android:layout_height="170dp"
     app:cardCornerRadius="12dp"
-    app:cardBackgroundColor="#0C2456"
+    app:cardBackgroundColor="#1C0358"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
     app:contentPaddingBottom="10dp"
