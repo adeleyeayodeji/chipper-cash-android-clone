@@ -14,6 +14,8 @@
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/add_cash_layout"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="6dp"
@@ -23,8 +25,6 @@
             app:contentPaddingLeft="15dp"
             app:contentPaddingRight="15dp"
             app:contentPaddingTop="5dp">
-
-            >
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"

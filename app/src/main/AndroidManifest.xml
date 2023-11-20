@@ -28,7 +28,10 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".UserPage"
+            android:name=".pages.AddCash"
+            android:exported="false" />
+        <activity
+            android:name=".pages.UserPage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
