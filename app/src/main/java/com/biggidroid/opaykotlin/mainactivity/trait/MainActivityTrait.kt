@@ -71,20 +71,20 @@ open class MainActivityTrait : AppCompatActivity(), NestedScrollView.OnScrollCha
         initObserver()
 
 
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-
-        val slideItems = listOf(
-            SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
-            SlideItem("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe),
-            SlideItem(
-                "Invest in global stocks for as low as $1",
-                R.drawable.icons8_globe,
-                R.drawable.wifi_tethering
-            )
-        )
-
-        val adapter2 = SliderAdapter(this, slideItems)
-        viewPager.adapter = adapter2
+//        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+//
+//        val slideItems = listOf(
+//            SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
+//            SlideItem("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe),
+//            SlideItem(
+//                "Invest in global stocks for as low as $1",
+//                R.drawable.icons8_globe,
+//                R.drawable.wifi_tethering
+//            )
+//        )
+//
+//        val adapter2 = SliderAdapter(this, slideItems)
+//        viewPager.adapter = adapter2
 
         // Sample list of TransactionItem objects (replace with your data)
         val transactionItems = listOf(

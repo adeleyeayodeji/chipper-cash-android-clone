@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             app:elevation="0dp">
 
-            <include layout="@layout/home_header" />
+            <include
+                android:id="@+id/home_app_header_contraint_layout"
+                layout="@layout/home_header" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

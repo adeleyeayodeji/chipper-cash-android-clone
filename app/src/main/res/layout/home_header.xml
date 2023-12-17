@@ -64,7 +64,9 @@
         app:layout_constraintTop_toBottomOf="@+id/header"
         >
 
-        <include layout="@layout/header_center_balanceview" />
+        <include
+            android:id="@+id/header_center_balanceview"
+            layout="@layout/header_center_balanceview" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
