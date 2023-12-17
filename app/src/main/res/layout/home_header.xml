@@ -42,7 +42,7 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/user"
+            android:id="@+id/user_home_icon"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:paddingStart="50dp"

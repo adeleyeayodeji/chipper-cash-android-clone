@@ -221,7 +221,7 @@ open class MainActivityTrait : AppCompatActivity(), NestedScrollView.OnScrollCha
         balanceHeaderTop = findViewById(R.id.balanceHeaderTop)
         home_header_contraint_layout = findViewById(R.id.home_header_contraint_layout)
         header = findViewById(R.id.header)
-        user_home_icon = findViewById(R.id.user)
+        user_home_icon = findViewById(R.id.user_home_icon)
         add_cash_layout = findViewById(R.id.add_cash_layout)
 
         //move balance_view_header_logic to top
