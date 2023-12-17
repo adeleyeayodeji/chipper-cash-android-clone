@@ -295,21 +295,7 @@ open class MainActivityTrait : AppCompatActivity(), NestedScrollView.OnScrollCha
         user_home_icon.setOnClickListener {
             //goto user page
             val intent = Intent(this, UserPage::class.java)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                // Apply activity transition
-                val transition = TransitionInflater.from(this)
-                    .inflateTransition(R.transition.custom_slide_transition)
-
-                window.reenterTransition = transition
-                window.exitTransition = transition
-
-// Start the new activity
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-            } else {
-                // Swap without transition
-                startActivity(intent)
-            }
+            startActivity(intent)
         }
     }
 

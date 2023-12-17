@@ -17,6 +17,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    //view binding
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -43,6 +48,13 @@ android {
 }
 
 dependencies {
+    val fragment_version = "1.6.2"
+
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+    //navigation fragment
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-alpha10")
+
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
