@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    style="@style/ChildElementStyle"
     android:paddingBottom="@dimen/_20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        style="@style/ChildElementStyle"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/ChildElementStyle"
             android:id="@+id/bottom_sheet_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,6 +28,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            style="@style/ChildElementStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -36,6 +39,7 @@
             >
 
             <ImageView
+                style="@style/ChildElementStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -46,9 +50,11 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="260dp"
                 android:orientation="vertical"
+                style="@style/ChildElementStyle"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/ChildElementStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Help Center"
@@ -57,6 +63,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    style="@style/ChildElementStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Resolve issue quicker. Help yourself with our support articles"
@@ -66,6 +73,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
+                style="@style/ChildElementStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -84,9 +92,11 @@
             android:textColor="@color/black"
             android:orientation="horizontal"
             android:layout_gravity="fill_horizontal"
+            style="@style/ChildElementStyle"
             >
 
             <ImageView
+                style="@style/ChildElementStyle"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="17dp"
                 android:layout_width="30dp"
@@ -95,11 +105,13 @@
                 />
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                style="@style/ChildElementStyle"
                 android:layout_width="260dp"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/ChildElementStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chat with us"
@@ -108,6 +120,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    style="@style/ChildElementStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chat with someone. We'll respond as soon as we can"
@@ -117,6 +130,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
+                style="@style/ChildElementStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

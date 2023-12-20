@@ -4,10 +4,14 @@
     <style name="BottomSheetDialogCustom" parent="Theme.Design.BottomSheetDialog">
         <item name="android:topLeftRadius">0dp</item>
         <item name="android:topRightRadius">0dp</item>
+        <item name="android:foregroundTint">#000</item>
+    </style>
+
+    <style name="ChildElementStyle">
+        <item name="android:background">#FFFFFF</item>
     </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here -->
         <!-- Customize your theme here -->
         <item name="colorPrimary">#8000FF</item>
         <item name="colorPrimaryDark">#8000FF</item>
@@ -32,7 +36,7 @@
         <!-- Customize the appearance of the app bar overlay here -->
     </style>
 
-<!--    TextAppearance.BottomNavigationView.Active-->
+    <!--    TextAppearance.BottomNavigationView.Active-->
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
     </style>
