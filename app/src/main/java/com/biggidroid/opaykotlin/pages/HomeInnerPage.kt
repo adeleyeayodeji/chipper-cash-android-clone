@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -294,28 +295,28 @@ class HomeInnerPage : Fragment() {
         }
     }
 
-  private fun initObserver() {
-    //observe currencyVisibility
-    appViewModel.currencyVisibility.observe(viewLifecycleOwner) {
-        var parentView = binding.balanceLayout
-        var parentViewHeader = binding.homeAppHeaderContraintLayout.headerCenterBalanceview
-        if (it) {
-            //if balance is ***** then set balance text to 0.00
-            parentView.balance.text = "488.14"
-            //balanceHeaderTop
-            parentViewHeader.balanceHeaderTop.text = "488.14"
-            //set visibility icon to visibility_off_icon
-            parentView.visibilityOnIcon.setImageResource(R.drawable.visibility_on)
-        } else {
-            //if balance is not ***** then set balance text to *****
-            parentView.balance.text = "* * * * *"
-            //balanceHeaderTop
-            parentViewHeader.balanceHeaderTop.text = "* * * * *"
-            //set visibility icon to visibility_on_icon
-            parentView.visibilityOnIcon.setImageResource(R.drawable.visibility_off)
+    private fun initObserver() {
+        //observe currencyVisibility
+        appViewModel.currencyVisibility.observe(viewLifecycleOwner) {
+            var parentView = binding.balanceLayout
+            var parentViewHeader = binding.homeAppHeaderContraintLayout.headerCenterBalanceview
+            if (it) {
+                //if balance is ***** then set balance text to 0.00
+                parentView.balance.text = "488.14"
+                //balanceHeaderTop
+                parentViewHeader.balanceHeaderTop.text = "488.14"
+                //set visibility icon to visibility_off_icon
+                parentView.visibilityOnIcon.setImageResource(R.drawable.visibility_on)
+            } else {
+                //if balance is not ***** then set balance text to *****
+                parentView.balance.text = "* * * * *"
+                //balanceHeaderTop
+                parentViewHeader.balanceHeaderTop.text = "* * * * *"
+                //set visibility icon to visibility_on_icon
+                parentView.visibilityOnIcon.setImageResource(R.drawable.visibility_off)
+            }
         }
     }
-}
 
     //set on click listener
     private fun setOnClickListener() {
@@ -335,18 +336,16 @@ class HomeInnerPage : Fragment() {
 
         //set on click listener on info
         binding.homeAppHeaderContraintLayout.info.setOnClickListener {
-            Log.d("TAG_DATA", "setOnClickListener: ")
-            // Get a reference to the Vibrator service
-            val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-            // Vibrate for 50 milliseconds (adjust duration as needed)
-            vibrator.vibrate(50)
-
             val bottomSheetFragment = InfoBottomSheet()
+            bottomSheetFragment.setStyle(
+                DialogFragment.STYLE_NORMAL,
+                R.style.BottomSheetDialogCustom
+            )
             bottomSheetFragment.show(
                 requireActivity().supportFragmentManager,
                 bottomSheetFragment.tag
             )
+
         }
 
         //add_cash_layout
