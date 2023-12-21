@@ -47,6 +47,7 @@ class HomeInnerPage : Fragment() {
     private val binding get() = _binding!!
 
     public lateinit var appViewModel: AppViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +70,7 @@ class HomeInnerPage : Fragment() {
         //init default currency visibility
         appViewModel.initDefaultCurrencyVisibility(appContext)
 
-        val viewPager = binding.bannerSliderLayout.adsBannerSlider;
+        val viewPager = binding.homeInnerContent.bannerSliderLayout.adsBannerSlider
 
         val slideItems = listOf(
             SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
@@ -201,7 +202,7 @@ class HomeInnerPage : Fragment() {
         )
 
         //init transactionRecyclerView
-        val transactionRecyclerView = binding.transactionRecyclerView
+        val transactionRecyclerView = binding.homeInnerContent.transactionRecyclerView
 
         val transactionAdapter = TransactionItemAdapter(appContext, transactionItems)
         transactionRecyclerView.adapter = transactionAdapter
@@ -224,21 +225,21 @@ class HomeInnerPage : Fragment() {
      */
     private fun onScrollListener() {
         //set on scroll listener on home_nested_scroll_view
-        binding.homeNestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, _: Int, scrollY: Int, _: Int, _: Int ->
+        binding.homeInnerContent.homeNestedScrollView.setOnScrollChangeListener { v: NestedScrollView?, _: Int, scrollY: Int, _: Int, _: Int ->
             //visibility visible
             //set opacity from 0.0f to 0.1f till 1.0f
             val opacity = scrollY.toFloat() / 300 // 0.0f to 1.0f
             //home_app_bar_layout
             val balance_view_header_logic =
-                binding.homeAppHeaderContraintLayout.balanceViewHeaderLogic
+                binding.homeInnerContent.homeAppHeaderContraintLayout.balanceViewHeaderLogic
             //home_header_contraint_layout
             val home_header_contraint_layout =
-                binding.homeAppHeaderContraintLayout.homeHeaderContraintLayout
+                binding.homeInnerContent.homeAppHeaderContraintLayout.homeHeaderContraintLayout
             //header_center_balanceview
             val currency_selector_header_top =
-                binding.homeAppHeaderContraintLayout.headerCenterBalanceview.currencySelectorHeaderTop
+                binding.homeInnerContent.homeAppHeaderContraintLayout.headerCenterBalanceview.currencySelectorHeaderTop
             //header
-            val header = binding.homeAppHeaderContraintLayout.header
+            val header = binding.homeInnerContent.homeAppHeaderContraintLayout.header
 //            Log.d("TAG_DATA", "onScrollopacity: $opacity")
             balance_view_header_logic.alpha = opacity
             //move balance_view_header_logic to top
@@ -298,8 +299,8 @@ class HomeInnerPage : Fragment() {
     private fun initObserver() {
         //observe currencyVisibility
         appViewModel.currencyVisibility.observe(viewLifecycleOwner) {
-            var parentView = binding.balanceLayout
-            var parentViewHeader = binding.homeAppHeaderContraintLayout.headerCenterBalanceview
+            var parentView = binding.homeInnerContent.balanceLayout
+            var parentViewHeader = binding.homeInnerContent.homeAppHeaderContraintLayout.headerCenterBalanceview
             if (it) {
                 //if balance is ***** then set balance text to 0.00
                 parentView.balance.text = "488.14"
@@ -320,8 +321,8 @@ class HomeInnerPage : Fragment() {
 
     //set on click listener
     private fun setOnClickListener() {
-        var parentView = binding.balanceLayout
-        var parentViewAddCash = binding.balanceButtonLayout
+        var parentView = binding.homeInnerContent.balanceLayout
+        var parentViewAddCash = binding.homeInnerContent.balanceButtonLayout
         //set on click listener on visibility_on_icon
         parentView.visibilityOnIcon.setOnClickListener {
             Log.d("TAG_DATA", "setOnClickListener: ")
@@ -335,7 +336,7 @@ class HomeInnerPage : Fragment() {
         }
 
         //set on click listener on info
-        binding.homeAppHeaderContraintLayout.info.setOnClickListener {
+        binding.homeInnerContent.homeAppHeaderContraintLayout.info.setOnClickListener {
             val bottomSheetFragment = InfoBottomSheet()
             bottomSheetFragment.setStyle(
                 DialogFragment.STYLE_NORMAL,
@@ -360,7 +361,7 @@ class HomeInnerPage : Fragment() {
         }
 
         //set onclick user_home_icon
-        binding.homeAppHeaderContraintLayout.userHomeIcon.setOnClickListener {
+        binding.homeInnerContent.homeAppHeaderContraintLayout.userHomeIcon.setOnClickListener {
             //goto user page fragment
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
