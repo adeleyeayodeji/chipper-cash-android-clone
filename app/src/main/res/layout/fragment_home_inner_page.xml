@@ -6,10 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".pages.HomeInnerPage">
 
-
     <include
         android:id="@+id/home_inner_content"
         layout="@layout/home_inner_content" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

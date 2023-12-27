@@ -30,6 +30,10 @@ import com.biggidroid.opaykotlin.databinding.FragmentHomeInnerPageBinding
 import com.biggidroid.opaykotlin.model.SlideItem
 import com.biggidroid.opaykotlin.model.TransactionItem
 import com.biggidroid.opaykotlin.viewmodel.AppViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -48,18 +52,17 @@ class HomeInnerPage : Fragment() {
 
     public lateinit var appViewModel: AppViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setRetainInstance(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         //init view binding
         _binding = FragmentHomeInnerPageBinding.inflate(inflater, container, false)
-        //set content view
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         //init appContext
         appContext = requireContext().applicationContext
@@ -67,155 +70,182 @@ class HomeInnerPage : Fragment() {
         //init view model
         appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
 
-        //init default currency visibility
-        appViewModel.initDefaultCurrencyVisibility(appContext)
-
-        val viewPager = binding.homeInnerContent.bannerSliderLayout.adsBannerSlider
-
-        val slideItems = listOf(
-            SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
-            SlideItem("Get Paid in USD Globally", R.drawable.lab_profile, R.drawable.icons8_globe),
-            SlideItem(
-                "Invest in global stocks for as low as $1",
-                R.drawable.icons8_globe,
-                R.drawable.wifi_tethering
-            )
-        )
-
-        val adapter2 = SliderAdapter(appContext, slideItems)
-        viewPager.adapter = adapter2
-
-        // Sample list of TransactionItem objects (replace with your data)
-        val transactionItems = listOf(
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-            TransactionItem(
-                R.drawable.account_circle_black,
-                "You paid IKEJA Prepaid Electricity",
-                "₦5,000.00",
-                "Thursday, 12th March 2020",
-                "debit",
-                "For IKEJA Prepaid Electricity"
-            ),
-        )
-
-        //init transactionRecyclerView
-        val transactionRecyclerView = binding.homeInnerContent.transactionRecyclerView
-
-        val transactionAdapter = TransactionItemAdapter(appContext, transactionItems)
-        transactionRecyclerView.adapter = transactionAdapter
-        transactionRecyclerView.layoutManager = LinearLayoutManager(appContext)
+        //init core adapter
+        initCoreAdapter()
 
         //init on scroll listener
-        onScrollListener();
+        onScrollListener()
 
         //init observer
         initObserver()
 
         //set on click listener
         setOnClickListener()
+
+        //set content view
+        return binding.root
+    }
+
+    private fun initCoreAdapter() {
+        try {
+            //init default currency visibility
+            appViewModel.initDefaultCurrencyVisibility(appContext)
+
+            //init viewPager
+            val viewPager = binding.homeInnerContent.bannerSliderLayout.adsBannerSlider
+
+            //init transactionRecyclerView
+            val transactionRecyclerView = binding.homeInnerContent.transactionRecyclerView
+
+            // Load data in a background thread using coroutines
+            CoroutineScope(Dispatchers.IO).launch {
+                val slideItems = listOf(
+                    SlideItem("Protect Your Account!", R.drawable.nigeria, R.drawable.map),
+                    SlideItem(
+                        "Get Paid in USD Globally",
+                        R.drawable.lab_profile,
+                        R.drawable.icons8_globe
+                    ),
+                    SlideItem(
+                        "Invest in global stocks for as low as $1",
+                        R.drawable.icons8_globe,
+                        R.drawable.wifi_tethering
+                    )
+                )
+
+                // Sample list of TransactionItem objects (replace with your data)
+                val transactionItems = listOf(
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                    TransactionItem(
+                        R.drawable.account_circle_black,
+                        "You paid IKEJA Prepaid Electricity",
+                        "₦5,000.00",
+                        "Thursday, 12th March 2020",
+                        "debit",
+                        "For IKEJA Prepaid Electricity"
+                    ),
+                )
+
+                withContext(Dispatchers.Main) {
+                    val adapter2 = SliderAdapter(appContext, slideItems)
+                    viewPager.adapter = adapter2
+
+                    val transactionAdapter = TransactionItemAdapter(appContext, transactionItems)
+                    transactionRecyclerView.adapter = transactionAdapter
+                    transactionRecyclerView.layoutManager = LinearLayoutManager(appContext)
+                }
+            }
+        } catch (e: Exception) {
+            Log.d("TAG_DATA", "initCoreAdapter: ${e.message}")
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     /**
@@ -300,7 +330,8 @@ class HomeInnerPage : Fragment() {
         //observe currencyVisibility
         appViewModel.currencyVisibility.observe(viewLifecycleOwner) {
             var parentView = binding.homeInnerContent.balanceLayout
-            var parentViewHeader = binding.homeInnerContent.homeAppHeaderContraintLayout.headerCenterBalanceview
+            var parentViewHeader =
+                binding.homeInnerContent.homeAppHeaderContraintLayout.headerCenterBalanceview
             if (it) {
                 //if balance is ***** then set balance text to 0.00
                 parentView.balance.text = "488.14"
