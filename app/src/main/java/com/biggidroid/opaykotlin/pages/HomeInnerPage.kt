@@ -420,25 +420,12 @@ class HomeInnerPage : Fragment() {
         //add_cash_layout
         parentViewAddCash.addCashLayout.setOnClickListener {
             //goto add cash page fragment
-//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//            //bounce up animation
-//            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//            transaction.replace(R.id.fragment_container, AddCash())
-//            transaction.addToBackStack(null)
-//            transaction.commit()
-
-            val addCashFragmentLayout = parentFragmentManager.findFragmentByTag("add_cash")
-            parentFragmentManager.commit {
-                setReorderingAllowed(true)
-                currentMainFragment?.let { hide(it) }
-                if (addCashFragmentLayout == null) {
-                    currentMainFragment = AddCash()
-                    add(R.id.fragment_container, currentMainFragment!!, "add_cash")
-                } else {
-                    currentMainFragment = addCashFragmentLayout
-                    show(addCashFragmentLayout)
-                }
-            }
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            //bounce up animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            transaction.replace(R.id.fragment_container, AddCash())
+            transaction.addToBackStack("AddCash")
+            transaction.commit()
         }
 
         //set onclick user_home_icon

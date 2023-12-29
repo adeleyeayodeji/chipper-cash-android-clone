@@ -31,11 +31,18 @@ class HomePage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         currentFragment = parentFragmentManager.findFragmentById(R.id.fragment_container_home)
-        if (currentFragment == null) {
-            currentFragment = HomeInnerPage()
-            parentFragmentManager.commit {
+
+        parentFragmentManager.commit {
+            if (currentFragment == null) {
+                currentFragment = HomeInnerPage()
                 setReorderingAllowed(true)
                 add(R.id.fragment_container_home, currentFragment!!, "home")
+            }else{
+                setReorderingAllowed(true)
+                //print currentFragment
+                println("currentFragment: $currentFragment")
+                //show current fragment
+                show(currentFragment!!)
             }
         }
 
