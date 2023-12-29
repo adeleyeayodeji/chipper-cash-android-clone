@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,8 @@ import kotlinx.coroutines.withContext
 class HomeInnerPage : Fragment() {
     //binding
     private var _binding: FragmentHomeInnerPageBinding? = null
+
+    private var currentMainFragment: Fragment? = null
 
     //appContext
     private lateinit var appContext: Context
@@ -82,6 +85,10 @@ class HomeInnerPage : Fragment() {
         //set on click listener
         setOnClickListener()
 
+        //currentMainFragment
+        currentMainFragment =
+            parentFragmentManager.findFragmentById(R.id.fragment_container)
+
         //set content view
         return binding.root
     }
@@ -96,6 +103,26 @@ class HomeInnerPage : Fragment() {
 
             //init transactionRecyclerView
             val transactionRecyclerView = binding.homeInnerContent.transactionRecyclerView
+
+            //shimmer_view_container
+            val shimmerContainer = binding.homeInnerContent.bannerSliderLayout.facebookShimmerLayout.shimmerViewContainer
+
+            //viewSwitcher
+            val viewSwitcher = binding.homeInnerContent.bannerSliderLayout.viewSwitcher
+
+            //viewSwitcherForTransactions
+            val viewSwitcherForTransactions = binding.homeInnerContent.viewSwitcherForTransactions
+
+            //facebook_shimmer_layout_for_transactions
+            val facebookShimmerLayoutForTransactions = binding.homeInnerContent.facebookShimmerLayoutForTransactions.shimmerViewContainerForTransactions
+
+            // Start the shimmer animation and show the skeleton layout
+            shimmerContainer.startShimmer()
+            viewSwitcher.displayedChild = 0
+
+            // Start the shimmer animation and show the skeleton layout
+            facebookShimmerLayoutForTransactions.startShimmer()
+            viewSwitcherForTransactions.displayedChild = 1
 
             // Load data in a background thread using coroutines
             CoroutineScope(Dispatchers.IO).launch {
@@ -230,6 +257,16 @@ class HomeInnerPage : Fragment() {
                 )
 
                 withContext(Dispatchers.Main) {
+                    // Stop the shimmer animation and show the ViewPager
+                    shimmerContainer.stopShimmer()
+                    //remove shimmerContainer from viewSwitcher
+                    viewSwitcher.displayedChild = 1
+
+                    // Stop the shimmer animation and show the ViewPager
+                    facebookShimmerLayoutForTransactions.stopShimmer()
+                    //remove facebookShimmerLayoutForTransactions from viewSwitcherForTransactions
+                    viewSwitcherForTransactions.displayedChild = 0
+
                     val adapter2 = SliderAdapter(appContext, slideItems)
                     viewPager.adapter = adapter2
 
@@ -383,12 +420,25 @@ class HomeInnerPage : Fragment() {
         //add_cash_layout
         parentViewAddCash.addCashLayout.setOnClickListener {
             //goto add cash page fragment
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            //bounce up animation
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction.replace(R.id.fragment_container, AddCash())
-            transaction.addToBackStack(null)
-            transaction.commit()
+//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//            //bounce up animation
+//            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//            transaction.replace(R.id.fragment_container, AddCash())
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+
+            val addCashFragmentLayout = parentFragmentManager.findFragmentByTag("add_cash")
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                currentMainFragment?.let { hide(it) }
+                if (addCashFragmentLayout == null) {
+                    currentMainFragment = AddCash()
+                    add(R.id.fragment_container, currentMainFragment!!, "add_cash")
+                } else {
+                    currentMainFragment = addCashFragmentLayout
+                    show(addCashFragmentLayout)
+                }
+            }
         }
 
         //set onclick user_home_icon

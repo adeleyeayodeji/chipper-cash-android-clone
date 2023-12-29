@@ -103,19 +103,30 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/airtime_data_paybills_layout" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/transactionRecyclerView"
+                    <ViewSwitcher
+                        android:id="@+id/viewSwitcherForTransactions"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="@dimen/_20dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="30dp"
-                        android:nestedScrollingEnabled="true"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/banner_slider_layout"
-                        tools:listitem="@layout/transaction_item_layout" />
+                        android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/transactionRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="30dp"
+                            android:nestedScrollingEnabled="true"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/banner_slider_layout"
+                            tools:listitem="@layout/transaction_item_layout" />
+
+                        <include
+                            android:id="@+id/facebook_shimmer_layout_for_transactions"
+                            layout="@layout/view_pager_item_skeleton_for_transactions" />
+
+                    </ViewSwitcher>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.core.widget.NestedScrollView>

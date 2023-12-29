@@ -11,13 +11,26 @@
     app:layout_constraintTop_toBottomOf="@id/airtime_data_paybills_layout"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/ads_banner_slider"
-        android:layout_width="wrap_content"
-        android:layout_height="170dp"
-        android:layout_marginTop="@dimen/_20dp"
-        android:layout_marginStart="@dimen/_20dp"
-        android:layout_marginEnd="@dimen/_20dp"
-        />
+    <ViewSwitcher
+        android:id="@+id/viewSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ShimmerFrameLayout (skeleton layout) -->
+        <include
+            android:id="@+id/facebook_shimmer_layout"
+            layout="@layout/view_pager_item_skeleton" />
+
+        <!--  Banner Slider-->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/ads_banner_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginEnd="@dimen/_20dp"
+            />
+
+    </ViewSwitcher>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
