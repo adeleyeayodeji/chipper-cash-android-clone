@@ -1,15 +1,18 @@
 package com.biggidroid.opaykotlin.pages
 
+import android.hardware.SensorManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import com.biggidroid.opaykotlin.R
 import com.biggidroid.opaykotlin.databinding.FragmentHomePageBinding
-import com.biggidroid.opaykotlin.pages.skeleton.SkeletonLoading
+
 
 class HomePage : Fragment() {
     private var _binding: FragmentHomePageBinding? = null
@@ -30,26 +33,28 @@ class HomePage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        currentFragment = parentFragmentManager.findFragmentById(R.id.fragment_container_home)
-
-        parentFragmentManager.commit {
-            if (currentFragment == null) {
-                currentFragment = HomeInnerPage()
-                setReorderingAllowed(true)
-                add(R.id.fragment_container_home, currentFragment!!, "home")
-            }else{
-                setReorderingAllowed(true)
-                //print currentFragment
-                println("currentFragment: $currentFragment")
-                //show current fragment
-                show(currentFragment!!)
-            }
-        }
-
         //bottom_navigation_view
         binding.fragmentHomePageContainer.bottomNavigationView.setOnItemSelectedListener { item ->
             handleNavigationSelection(item)
         }
+
+        // Restore selected item ID
+        if (savedInstanceState != null) {
+            binding.fragmentHomePageContainer.bottomNavigationView.selectedItemId =
+                savedInstanceState.getInt("selectedItemId")
+        } else {
+            // Trigger the first index on bottomnavigationview
+            binding.fragmentHomePageContainer.bottomNavigationView.selectedItemId =
+                R.id.navigation_home
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(
+            "selectedItemId",
+            binding.fragmentHomePageContainer.bottomNavigationView.selectedItemId
+        )
     }
 
     private fun findFragmentByTag(s: String): Fragment? {
@@ -113,5 +118,20 @@ class HomePage : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        currentFragment?.let {
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                show(it)
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("currentFragment", "Pause")
     }
 }

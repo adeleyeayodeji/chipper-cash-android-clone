@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".pages.UserPage">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -24,8 +25,10 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:paddingEnd="30dp"
+            android:paddingStart="0dp"
             android:contentDescription="@string/info_icon"
-            android:src="@drawable/close_24px" />
+            android:src="@drawable/close_24px"
+            android:focusable="true" />
 
         <Space
             android:layout_width="0dp"

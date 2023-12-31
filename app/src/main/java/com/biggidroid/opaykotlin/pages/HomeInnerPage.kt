@@ -105,7 +105,8 @@ class HomeInnerPage : Fragment() {
             val transactionRecyclerView = binding.homeInnerContent.transactionRecyclerView
 
             //shimmer_view_container
-            val shimmerContainer = binding.homeInnerContent.bannerSliderLayout.facebookShimmerLayout.shimmerViewContainer
+            val shimmerContainer =
+                binding.homeInnerContent.bannerSliderLayout.facebookShimmerLayout.shimmerViewContainer
 
             //viewSwitcher
             val viewSwitcher = binding.homeInnerContent.bannerSliderLayout.viewSwitcher
@@ -114,7 +115,8 @@ class HomeInnerPage : Fragment() {
             val viewSwitcherForTransactions = binding.homeInnerContent.viewSwitcherForTransactions
 
             //facebook_shimmer_layout_for_transactions
-            val facebookShimmerLayoutForTransactions = binding.homeInnerContent.facebookShimmerLayoutForTransactions.shimmerViewContainerForTransactions
+            val facebookShimmerLayoutForTransactions =
+                binding.homeInnerContent.facebookShimmerLayoutForTransactions.shimmerViewContainerForTransactions
 
             // Start the shimmer animation and show the skeleton layout
             shimmerContainer.startShimmer()
@@ -419,11 +421,25 @@ class HomeInnerPage : Fragment() {
 
         //add_cash_layout
         parentViewAddCash.addCashLayout.setOnClickListener {
-            //goto add cash page fragment
+            // Get the fragment from the fragment manager
+            val addCashFragment =
+                requireActivity().supportFragmentManager.findFragmentByTag("AddCash")
+
+            // Begin the transaction
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            //bounce up animation
+
+            // Set the transition animation
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction.replace(R.id.fragment_container, AddCash())
+
+            if (addCashFragment == null) {
+                // If the fragment is not already added, add it
+                transaction.add(R.id.fragment_container, AddCash(), "AddCash")
+            } else {
+                // If the fragment is already added, show it
+                transaction.show(addCashFragment)
+            }
+
+            // Add the transaction to the back stack and commit
             transaction.addToBackStack("AddCash")
             transaction.commit()
         }
@@ -431,10 +447,26 @@ class HomeInnerPage : Fragment() {
         //set onclick user_home_icon
         binding.homeInnerContent.homeAppHeaderContraintLayout.userHomeIcon.setOnClickListener {
             //goto user page fragment
+            // Get the fragment from the fragment manager
+            val userPageFragment =
+                requireActivity().supportFragmentManager.findFragmentByTag("UserPage")
+
+            // Begin the transaction
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+            // Set the transition animation
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction.replace(R.id.fragment_container, UserPage())
-            transaction.addToBackStack(null)
+
+            if (userPageFragment == null) {
+                // If the fragment is not already added, add it
+                transaction.add(R.id.fragment_container, UserPage(), "UserPage")
+            } else {
+                // If the fragment is already added, show it
+                transaction.show(userPageFragment)
+            }
+
+            // Add the transaction to the back stack and commit
+            transaction.addToBackStack("UserPage")
             transaction.commit()
         }
     }
