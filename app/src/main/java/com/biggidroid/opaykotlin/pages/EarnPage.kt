@@ -38,10 +38,10 @@ class EarnPage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //set on click listener
-        setOnclikListener()
+        setOnclickListener()
     }
 
-    private fun setOnclikListener() {
+    private fun setOnclickListener() {
         binding.earnButtonInviteFriends.setOnClickListener {
              //share invite link
             val sendIntent: Intent = Intent().apply {
@@ -113,6 +113,40 @@ class EarnPage : Fragment() {
 
             // Add the transaction to the back stack and commit
             transaction.addToBackStack("webViewFragment")
+            transaction.commit()
+        }
+
+        //earn_button_view_referral_history
+        binding.earnButtonViewReferralHistory.setOnClickListener {
+            //navigate to referral history page
+
+            // Get the fragment from the fragment manager
+            val referralHistory =
+                requireActivity().supportFragmentManager.findFragmentByTag("referralHistory")
+
+            // Begin the transaction
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+            // Set the transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+
+            //hide any fragment that is visible
+            val earnPage =
+                requireActivity().supportFragmentManager.findFragmentByTag("earnPage")
+            if (earnPage != null) {
+                transaction.hide(earnPage)
+            }
+
+            if (referralHistory == null) {
+                // If the fragment is not already added, add it
+                transaction.add(R.id.fragment_container_home, ReferralHistory(), "referralHistory")
+            } else {
+                // If the fragment is already added, show it
+                transaction.show(referralHistory)
+            }
+
+            // Add the transaction to the back stack and commit
+            transaction.addToBackStack("referralHistory")
             transaction.commit()
         }
     }

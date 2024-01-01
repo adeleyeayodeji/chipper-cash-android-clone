@@ -101,6 +101,9 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/earn_button_view_referral_history"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
