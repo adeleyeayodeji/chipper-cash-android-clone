@@ -28,7 +28,8 @@
             android:paddingStart="0dp"
             android:contentDescription="@string/info_icon"
             android:src="@drawable/close_24px"
-            android:focusable="true" />
+            android:focusable="true"
+            />
 
         <Space
             android:layout_width="0dp"

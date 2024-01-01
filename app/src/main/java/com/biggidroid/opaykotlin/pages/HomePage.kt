@@ -132,6 +132,6 @@ class HomePage : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        Log.e("currentFragment", "Pause")
+//        Log.e("currentFragment", "Pause")
     }
 }

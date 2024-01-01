@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="15dp"
+    android:paddingEnd="20dp"
+    android:background="@color/white"
+    tools:context=".pages.EnterReferralCode">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/enter_referral_code_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/back_arrow"
+            android:focusable="true"
+            android:paddingStart="0dp"
+            android:paddingEnd="30dp"
+            android:src="@drawable/arrow_back_ios" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/enter_referral_code_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a referral code"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                />
+
+            <EditText
+                android:id="@+id/enter_referral_code_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="Referral Code"
+                android:inputType="text"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                />
+
+            <Button
+                android:id="@+id/earn_button_invite_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20dp"
+                android:background="@drawable/button_bg"
+                android:text="Enter"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

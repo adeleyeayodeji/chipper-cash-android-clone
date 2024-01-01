@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/earn_linear_layout_bottom"
-        app:layout_constraintHeight_percent="0.63"
+        app:layout_constraintHeight_percent="0.53"
         >
 
     <LinearLayout
@@ -74,6 +74,7 @@
         >
 
         <Button
+            android:id="@+id/earn_button_invite_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -86,6 +87,7 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/earn_button_enter_referral_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -116,11 +118,14 @@
             android:layout_height="50dp" />
 
         <TextView
+            android:id="@+id/earn_text_view_terms_and_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Terms and Conditions"
             android:textColor="#673AB7"
             android:textSize="16sp"
+            android:padding="15dp"
+            android:clickable="true"
             android:textStyle="bold" />
 
         <Space
