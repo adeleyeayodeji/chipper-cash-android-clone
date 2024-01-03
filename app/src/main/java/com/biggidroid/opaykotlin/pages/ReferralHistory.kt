@@ -52,17 +52,6 @@ class ReferralHistory : Fragment() {
             }
         }.attach()
 
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            // Inflate the custom tab layout view
-//            val binding = ReferralHistoryTabItemBinding.inflate(layoutInflater, tabLayout, false)
-//
-//            tab.customView = binding.root
-//            binding.tab.text = when (position) {
-//                0 -> "Pending"
-//                else -> "Completed"
-//            }
-//        }.attach()
-
     }
 
     private fun setOnclickListener() {
