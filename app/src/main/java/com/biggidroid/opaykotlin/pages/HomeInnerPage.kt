@@ -11,6 +11,7 @@ import android.transition.TransitionInflater
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -35,6 +36,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.logging.Handler
 
 /**
  * A simple [Fragment] subclass.
@@ -284,7 +286,44 @@ class HomeInnerPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //auto scroll view pager
+        autoScrollViewPager()
+    }
 
+    /**
+     * Auto scroll view pager
+     *
+     */
+    private fun autoScrollViewPager() {
+        val delayMillis: Long = 3000 // change this to make the updates faster or slower
+
+        val runnable = object : Runnable {
+            var currentItem = 0
+
+            override fun run() {
+                val viewPager = binding.homeInnerContent.bannerSliderLayout.adsBannerSlider
+                if (currentItem >= viewPager.adapter?.count ?: 0) {
+                    currentItem = 0
+                }
+                viewPager.setCurrentItem(currentItem++, true)
+                viewPager.postDelayed(this, delayMillis)
+            }
+        }
+
+        val viewPager = binding.homeInnerContent.bannerSliderLayout.adsBannerSlider
+        viewPager.postDelayed(runnable, delayMillis)
+        viewPager.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    viewPager.removeCallbacks(runnable)
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    viewPager.postDelayed(runnable, delayMillis)
+                    v.performClick() // Add this line
+                }
+            }
+            false
+        }
     }
 
     /**
@@ -489,6 +528,7 @@ class HomeInnerPage : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.homeInnerContent.bannerSliderLayout.adsBannerSlider.removeCallbacks(null)
         _binding = null
     }
 }
