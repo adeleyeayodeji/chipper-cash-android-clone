@@ -1,5 +1,6 @@
 package com.biggidroid.opaykotlin.pages
 
+import android.content.Context
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import com.biggidroid.opaykotlin.R
 import com.biggidroid.opaykotlin.databinding.FragmentHomePageBinding
+import org.json.JSONObject
 
 
 class HomePage : Fragment() {
@@ -49,6 +52,12 @@ class HomePage : Fragment() {
         }
     }
 
+    /**
+     * Save selected bottom navigation item
+     * @param outState
+     *
+     * @return void
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(
@@ -57,11 +66,42 @@ class HomePage : Fragment() {
         )
     }
 
+    /**
+     * Save selected bottom navigation item to shared preference
+     * @param selectedBottomItemId
+     * @param name
+     *
+     * @return void
+     */
+    private fun saveSelectedBottomItemId(selectedBottomItemId: Int, name: String = "home") {
+        try {
+            val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            //create a json object for name and selectedBottomItemId
+            val jsonObject = JSONObject()
+            val innerObject = JSONObject()
+            innerObject.put("name", name)
+            innerObject.put("selectedBottomItemId", selectedBottomItemId)
+            jsonObject.put("savednav", innerObject)
+            //save the json object to shared preference
+            with(sharedPref.edit()) {
+                putString("selectedBottomItemId", jsonObject.toString())
+                apply()
+            }
+            //get the saved json object from shared preference
+            val savedJson = sharedPref.getString("selectedBottomItemId", "")
+            //log the saved json object
+            Log.e("savedJson", savedJson.toString())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun findFragmentByTag(s: String): Fragment? {
         return parentFragmentManager.findFragmentByTag(s)
     }
 
     private fun handleNavigationSelection(item: MenuItem): Boolean {
+        // Handle navigation selection
         return when (item.itemId) {
             R.id.navigation_home -> {
                 val homeFragment = findFragmentByTag("home")
@@ -76,6 +116,8 @@ class HomePage : Fragment() {
                         show(homeFragment)
                     }
                 }
+                // Save selected bottom item ID
+                saveSelectedBottomItemId(item.itemId, "home")
                 true
             }
 
@@ -92,6 +134,8 @@ class HomePage : Fragment() {
                         show(earnFragment)
                     }
                 }
+                // Save selected bottom item ID
+                saveSelectedBottomItemId(item.itemId, "earn")
                 true
             }
 
@@ -108,6 +152,8 @@ class HomePage : Fragment() {
                         show(investFragment)
                     }
                 }
+                // Save selected bottom item ID
+                saveSelectedBottomItemId(item.itemId, "invest")
                 true
             }
 

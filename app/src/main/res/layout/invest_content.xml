@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <HorizontalScrollView
+    <com.biggidroid.opaykotlin.parts.NonScrollableHorizontalScrollView
         android:id="@+id/ll_invest_page1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </com.biggidroid.opaykotlin.parts.NonScrollableHorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/ll_invest_page_bottom"
