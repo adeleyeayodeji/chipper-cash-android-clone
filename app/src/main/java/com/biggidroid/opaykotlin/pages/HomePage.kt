@@ -1,6 +1,9 @@
 package com.biggidroid.opaykotlin.pages
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +15,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.biggidroid.opaykotlin.MainActivity
 import com.biggidroid.opaykotlin.R
 import com.biggidroid.opaykotlin.databinding.FragmentHomePageBinding
 import org.json.JSONObject
@@ -50,6 +55,9 @@ class HomePage : Fragment() {
             binding.fragmentHomePageContainer.bottomNavigationView.selectedItemId =
                 R.id.navigation_home
         }
+
+        //set investment page as default
+//        setSelectedItemId(R.id.navigation_earn)
     }
 
     /**
@@ -168,6 +176,9 @@ class HomePage : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        //Register the broadcast receiver
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(receiver, IntentFilter(MainActivity.ACTION_MY_BROADCAST))
+        //Load the current fragment
         currentFragment?.let {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
@@ -176,8 +187,37 @@ class HomePage : Fragment() {
         }
     }
 
+    //Set bottom navigation view selected item id
+    fun setSelectedItemId(id: Int) {
+        binding.fragmentHomePageContainer.bottomNavigationView.selectedItemId = id
+    }
+
     override fun onPause() {
         super.onPause()
+        //Unregister the broadcast receiver
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
 //        Log.e("currentFragment", "Pause")
+    }
+
+    /**
+     * Broadcast receiver
+     *  - Handle the broadcast here
+     *
+     * @return void
+     *
+     * @see BroadcastReceiver
+     */
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == MainActivity.ACTION_MY_BROADCAST) {
+                // Handle the broadcast here
+                //get selectedItemId
+                val selectedItemId = intent.getIntExtra("selectedItemId", 0)
+                //set bottom navigation view selected item id
+                setSelectedItemId(selectedItemId)
+                //log
+                Log.d("MainActivity", "Broadcast received $selectedItemId")
+            }
+        }
     }
 }

@@ -1,11 +1,14 @@
 package com.biggidroid.opaykotlin
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.biggidroid.opaykotlin.databinding.ActivityMainBinding
 import com.biggidroid.opaykotlin.databinding.FragmentHomePageBinding
 import com.biggidroid.opaykotlin.mainactivity.trait.MainActivityTrait
@@ -15,9 +18,6 @@ import org.json.JSONObject
 class MainActivity : MainActivityTrait() {
     //binding
     private var _binding: ActivityMainBinding? = null
-
-    //binding homepage
-    private var _bindingHomePage: FragmentHomePageBinding? = null
 
     private var doubleBackToExitPressedOnce = false
 
@@ -29,8 +29,6 @@ class MainActivity : MainActivityTrait() {
 
         //init view binding
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        //init view binding homepage
-        _bindingHomePage = FragmentHomePageBinding.inflate(layoutInflater)
         //set content view
         setContentView(binding.root)
     }
@@ -38,6 +36,10 @@ class MainActivity : MainActivityTrait() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val ACTION_MY_BROADCAST = "com.biggidroid.opaykotlin.MY_BROADCAST"
     }
 
     override fun onBackPressed() {
@@ -54,20 +56,14 @@ class MainActivity : MainActivityTrait() {
                 //get name from parent
                 val name = JSONObject(parentName).getString("name")
                 val id = JSONObject(parentName).getInt("selectedBottomItemId")
-                //log parent name
-                Log.e("MainActivity", "Am working $name $id")
-                //check if the parent name is not home
+                // Trigger the first index on bottomnavigationview
                 if (name != "home") {
-                    // Trigger the first index on bottomnavigationview
-                    val bottomNavView = _bindingHomePage?.fragmentHomePageContainer?.bottomNavigationView
-                    if (bottomNavView == null) {
-                        Log.e("MainActivity", "BottomNavigationView is null")
-                    } else {
-                        bottomNavView.selectedItemId = id
-                        Log.d("MainActivity", "Set selected item id to $id")
-                    }
-                    //delete shared preference
-                    sharedPref.edit().remove("selectedBottomItemId").apply()
+                    Log.d("MainActivity", "onBackPressed me: $name")
+                    //send a broadcast to homePage
+                    val intent = Intent(ACTION_MY_BROADCAST)
+                    //pass the selected item id
+                    intent.putExtra("selectedItemId", R.id.navigation_home)
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
                     //return
                     return
                 }
@@ -76,6 +72,7 @@ class MainActivity : MainActivityTrait() {
                 //toast error
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             }
+
             //allow back press twice to exit
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()

@@ -3,20 +3,24 @@
     <item
         android:id="@+id/navigation_home"
         android:title="@string/home"
+        android:enabled="true"
         android:icon="@drawable/home" />
 
     <item
         android:id="@+id/navigation_earn"
         android:title="@string/earn"
+        android:enabled="true"
         android:icon="@drawable/local_atm" />
 
     <item
         android:id="@+id/navigation_invest"
         android:title="@string/invest"
+        android:enabled="true"
         android:icon="@drawable/finance_chip" />
 
     <item
         android:id="@+id/navigation_card"
         android:title="@string/card"
+        android:enabled="true"
         android:icon="@drawable/credit_card" />
 </menu>
